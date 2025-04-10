@@ -1,0 +1,64 @@
+<mat-toolbar color="primary">
+  <button mat-icon-button aria-label="Menu icon" (click)="toggleMenu()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <h1>My Finance Dashboard</h1>
+</mat-toolbar>
+
+<mat-sidenav-container autosize>
+  <mat-sidenav
+    [opened]="true"
+    mode="side"
+    [ngClass]="!isCollapsed ? 'expanded' : 'not-expanded'"
+  >
+    <mat-nav-list>
+      <a mat-list-item routerLink="/dashboard" routerLinkActive="active">
+        <span class="entry">
+          <mat-icon>house</mat-icon>
+          <span *ngIf="!isCollapsed">Dashboard</span>
+        </span>
+      </a>
+
+      <a mat-list-item routerLink="/transactions" routerLinkActive="active">
+        <span class="entry">
+          <mat-icon>sync_alt</mat-icon>
+          <span *ngIf="!isCollapsed">Transactions</span>
+        </span>
+      </a>
+
+      <a mat-list-item routerLink="/budget" routerLinkActive="active">
+        <span class="entry">
+          <mat-icon>account_balance_wallet</mat-icon>
+          <span *ngIf="!isCollapsed">Budget</span>
+        </span>
+      </a>
+
+      <a mat-list-item routerLink="/categories" routerLinkActive="active">
+        <span class="entry">
+          <mat-icon>category</mat-icon>
+          <span *ngIf="!isCollapsed">Categories</span>
+        </span>
+      </a>
+
+      <a mat-list-item routerLink="/reports" routerLinkActive="active">
+        <span class="entry">
+          <mat-icon>bar_chart</mat-icon>
+          <span *ngIf="!isCollapsed">Reports</span>
+        </span>
+      </a>
+
+      <a mat-list-item routerLink="/settings" routerLinkActive="active">
+        <span class="entry">
+          <mat-icon>settings</mat-icon>
+          <span *ngIf="!isCollapsed">Settings</span>
+        </span>
+      </a>
+
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <!-- Routed views render here -->
+    <router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

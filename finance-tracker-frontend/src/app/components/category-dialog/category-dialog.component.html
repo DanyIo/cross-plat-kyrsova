@@ -1,0 +1,18 @@
+<mat-dialog-content align='center'>
+    <h1 mat-dialog-title>{{ data.id ? 'Edit' : 'Add' }} Category</h1>
+    <div mat-dialog-content>
+        <mat-form-field>
+            <mat-label>Name</mat-label>
+            <input matInput [(ngModel)]="data.name" />
+        </mat-form-field>
+
+        <mat-form-field>
+            <input matInput type="color" [(ngModel)]="data.color" />
+        </mat-form-field>
+    </div>
+
+    <mat-dialog-actions align="center">
+        <button mat-button (click)="onNoClick()">Cancel</button>
+        <button mat-button (click)="closeDialogWithData()">Ok</button>
+    </mat-dialog-actions>
+</mat-dialog-content>

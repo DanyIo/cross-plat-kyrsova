@@ -1,0 +1,51 @@
+<mat-dialog-content align="center">
+  <h1 mat-dialog-title>{{ data.id ? 'Edit' : 'Add' }} Category</h1>
+  <!-- Amount Field -->
+  <div style="display: flex; justify-content: center; gap: 5px;">
+    <mat-form-field appearance="outline" class="full-width" align="center">
+      <mat-label>Amount</mat-label>
+      <input matInput [(ngModel)]="data.amount" name="amount" type="number" required />
+    </mat-form-field>
+
+    <!-- Category Field -->
+    <mat-form-field appearance="outline" class="full-width" align="center">
+      <mat-label>Category</mat-label>
+      <mat-select [(ngModel)]="data.category" name="category" required>
+        <mat-option *ngFor="let category of categories" [value]="category.name">
+          {{ category.name }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+
+
+  <!-- Transaction Type Field -->
+  <div style="display: flex; justify-content: center; gap: 5px;">
+
+    <mat-form-field appearance="outline" class="full-width" align="center">
+      <mat-label>Transaction Type</mat-label>
+      <mat-select [(ngModel)]="data.transaction_type" name="transaction_type" required>
+        <mat-option value="income">Income</mat-option>
+        <mat-option value="expense">Expense</mat-option>
+      </mat-select>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="full-width" align="center">
+      <mat-label>Date</mat-label>
+      <input matInput [(ngModel)]="data.date" name="date" type="date" required />
+    </mat-form-field>
+  </div>
+
+  <!-- Description Field -->
+  <mat-form-field appearance="outline" class="full-width" align="center">
+    <mat-label>Description</mat-label>
+    <textarea matInput [(ngModel)]="data.description" name="description"></textarea>
+  </mat-form-field>
+
+  <mat-dialog-actions align="center">
+    <button mat-button (click)="onCancel()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="dialogRef.close(data)">
+      Save
+    </button>
+  </mat-dialog-actions>
+</mat-dialog-content>

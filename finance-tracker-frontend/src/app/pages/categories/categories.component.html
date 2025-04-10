@@ -1,0 +1,22 @@
+<div class="category-container">
+    <div style="display: flex; flex-direction: row; justify-content: space-between; align-items: center; width: 95%;">
+
+        <h2>Manage Categories</h2>
+        <button mat-raised-button color="primary" (click)="openDialog()">➕ Add Category</button>
+    </div>
+    <mat-list>
+        <mat-list-item *ngFor="let category of categories">
+            <div class="list-item">
+                <mat-icon [style.color]="category.color">label</mat-icon>
+                <span class="category-text">{{ category.name }}</span>
+                <span class="spacer"></span>
+                <button mat-icon-button (click)="openDialog(category)">
+                    <mat-icon>edit</mat-icon>
+                </button>
+                <button mat-icon-button (click)="deleteCategory(category.id)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+            </div>
+        </mat-list-item>
+    </mat-list>
+</div>
