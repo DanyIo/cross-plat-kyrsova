@@ -19,6 +19,7 @@
   <h3>Income vs. Expense</h3>
   <div class="chart-container" *ngIf="chartData.length != 0">
     <ngx-charts-line-chart [results]="chartData" [scheme]="colorScheme" [xAxis]="true" [yAxis]="true" [legend]="true"
+  [legendTitle]="legendTitle"
       [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxisLabel]="'Month'" [yAxisLabel]="'Amount'" [autoScale]="true"
       [tooltipDisabled]="false" [timeline]="true">
     </ngx-charts-line-chart>
@@ -43,7 +44,9 @@
 
   <!-- Category Breakdown Pie Chart -->
   <div class="chart-container" *ngIf="categoryData.length != 0">
-    <ngx-charts-pie-chart [results]="categoryData" [scheme]="pieColorScheme" [legend]="true" [labels]="true">
+    <ngx-charts-pie-chart [results]="categoryData" [scheme]="pieColorScheme" [legend]="true"
+  [legendTitle]="legendTitle"
+      [labels]="true">
     </ngx-charts-pie-chart>
   </div>
 
@@ -52,8 +55,23 @@
     <h3>Budget vs Actual</h3>
     <mat-progress-bar mode="determinate" [value]="budgetData.percent_spent"></mat-progress-bar>
     <p>{{ budgetData.actual_spent | currency }} spent out of {{ budgetData.budget | currency }}</p>
-  </div>
 
+<ngx-charts-bar-vertical-2d
+  [view]="view"
+  [scheme]="colorScheme"
+  [results]="multi"
+  [gradient]="false"
+  [xAxis]="showXAxis"
+  [yAxis]="showYAxis"
+  [legend]="showLegend"
+  [legendTitle]="legendTitle"
+  [xAxisLabel]="xAxisLabel"
+  [yAxisLabel]="yAxisLabel"
+  [showXAxisLabel]="showXAxisLabel"
+  [showYAxisLabel]="showYAxisLabel"
+>
+</ngx-charts-bar-vertical-2d>
+</div>
  <!-- Recent Transactions -->
   <div class="recent-transactions"style="margin-bottom: 2rem;">
     <h3>Recent Transactions</h3>

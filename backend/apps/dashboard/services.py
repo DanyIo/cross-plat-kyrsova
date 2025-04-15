@@ -60,14 +60,13 @@ class DashboardService:
             entry["color"] = category_colors.get(entry["category"], "#000000")  # Default to black if not found
 
         return list(category_data)
-
-
-    
+ 
 
     def get_budget_vs_actual(self):
         current_month = now().month
         current_year = now().year
 
+        # Fetch the budget for the current month and year
         budget = Budget.objects.filter(user=self.user, month__month=current_month, month__year=current_year).first()
 
         if not budget:
@@ -79,8 +78,10 @@ class DashboardService:
                 "categories": [],
             }
 
+        # Get the total monthly budget (sum of category amounts)
         monthly_budget = budget.categories.aggregate(total=Sum("amount"))["total"] or 0
 
+        # Get total expenses for the current month (from the Transaction model)
         total_expense = Transaction.objects.filter(
             user=self.user,
             transaction_type=TransactionType.EXPENSE,
@@ -88,19 +89,26 @@ class DashboardService:
             date__year=current_year
         ).aggregate(total=Sum("amount"))["total"] or 0
 
-        # --- Get actual spending per category ---
-        category_expenses = Transaction.objects.filter(
-            user=self.user,
-            transaction_type=TransactionType.EXPENSE,
-            date__month=current_month,
-            date__year=current_year
-        ).values("category").annotate(actual=Sum("amount"))
+        # Get actual spending per category
+        category_expenses = (
+            Transaction.objects.filter(
+                user=self.user,
+                transaction_type=TransactionType.EXPENSE,
+                date__month=current_month,
+                date__year=current_year
+            )
+            .values("category")
+            .annotate(actual=Sum("amount"))
+            .order_by("category")
+        )
 
+        # Create a dictionary for actual spending by category
         actual_by_category = {item["category"]: item["actual"] for item in category_expenses}
 
+        # Create a list of category data with planned vs actual spending
         category_data = []
         for cat in budget.categories.select_related("category").all():
-            actual = actual_by_category.get(cat.category_id, 0)
+            actual = actual_by_category.get(cat.category.name, 0)
             category_data.append({
                 "category_id": cat.category.id,
                 "category_name": cat.category.name,
@@ -108,6 +116,7 @@ class DashboardService:
                 "actual": float(actual),
             })
 
+        # Return the final result with budget, actual spent, remaining budget, and category breakdown
         return {
             "budget": monthly_budget,
             "actual_spent": total_expense,

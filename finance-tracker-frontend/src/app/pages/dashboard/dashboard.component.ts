@@ -32,12 +32,21 @@ export class DashboardComponent {
   categoryDataByMonth: { [month: string]: any[] } = {}; // Stores category data for each month
   categoryData: any[] = []; // Current month's category data
   budgetData: any = {};
+  multi: any[] = [];
   financialSummary: any = {};
+  view: [number, number] = [700, 400]; // chart size (width, height)
   recentTransactions: any[] = [];
   months: string[] = []; // Available months
   selectedMonth: string = ''; // Currently selected month
   showGeneralCategoryData: boolean = false; // Toggle for general category data
-
+  showXAxis = true;
+  showLegend = true;
+  legendTitle = 'Type';
+  showXAxisLabel = true;
+  showYAxisLabel = true;
+  yAxisLabel = 'Amount ($)';
+  xAxisLabel = 'Category';
+  showYAxis = true;
   displayedColumns: string[] = ['category', 'amount', 'transaction_type', 'date'];
   colorScheme: Color = {
     name: 'custom',
@@ -60,7 +69,9 @@ export class DashboardComponent {
 
   loadDashboardData(): void {
     this._dashboardService.getDashboardData().subscribe((data) => {
+      debugger;
       this.financialSummary = data.financial_summary;
+      this.multi = this.transformToChartData(data.budget_vs_actual.categories);
       this.chartData = this.formatChartData(data.income_expense_chart);
       this.categoryDataByMonth = this.formatCategoryData(
         data.category_breakdown
@@ -73,7 +84,15 @@ export class DashboardComponent {
       this.updateCategoryData();
     });
   }
-
+  transformToChartData(categories: any[]): any[] {
+    return categories.map((cat) => ({
+      name: cat.category_name,
+      series: [
+        { name: 'Planned', value: cat.planned },
+        { name: 'Actual', value: cat.actual }
+      ]
+    }));
+  }
   formatChartData(data: any): any[] {
     if (!data) return [];
     const { income, expense } = data;
