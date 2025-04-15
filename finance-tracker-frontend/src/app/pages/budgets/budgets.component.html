@@ -1,11 +1,29 @@
-<div class="budget-container">
-    <h2>Budgets</h2>
-    <button mat-raised-button color="primary" (click)="openDialog()">➕ Add Budget</button>
 
-    <div *ngFor="let budget of budgets" class="budget-card">
-        <h3>{{ budget.name }}</h3>
-        <div *ngFor="let category of budget.categories">
-            <span [style.color]="category.color">{{ category.category_name }}</span> - {{ category.amount }} NOK
-        </div>
+
+<div class ="flex-block">  <h3>Monthly Budget</h3>
+
+<p>{{ getTotalAmount() | number: '1.2-2' }} €</p>
+
+  </div>
+  <mat-card-content>
+
+    <div *ngFor="let category of budget.categories" class="budget-category">
+      <mat-form-field appearance="outline" class="budget-field">
+        <mat-label>{{ category.category_name }}</mat-label>
+        <input
+          matInput
+          type="number"
+          [(ngModel)]="category.amount"
+          placeholder="Enter amount"
+        />
+      </mat-form-field>
     </div>
-</div>
+
+  </mat-card-content>
+
+<mat-card-actions class="save-button-wrapper">
+  <button mat-raised-button color="primary" (click)="saveBudget()">Save</button>
+</mat-card-actions>
+
+
+

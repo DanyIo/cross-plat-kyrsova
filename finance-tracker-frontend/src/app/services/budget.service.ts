@@ -6,21 +6,17 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class BudgetService {
-  constructor(private _httpService: HttpService) {}
+  constructor(private _httpService: HttpService) { }
 
-  private apiUrl = 'budgets/';
+  private apiUrl = 'budget/';
 
-  getBudgets(): Observable<any> {
+  getBudget(): Observable<any> {
     return this._httpService.get(this.apiUrl);
   }
 
-  createBudget(budget: any): Observable<any> {
+  updateBudget(budget: any): Observable<any> {
     debugger;
-    return this._httpService.post(this.apiUrl, budget);
-  }
-
-  updateBudget(id: number, budget: any): Observable<any> {
-    return this._httpService.put(`${this.apiUrl}${id}/`, budget);
+    return this._httpService.put(`${this.apiUrl}`, budget);
   }
 
   deleteBudget(id: number): Observable<any> {

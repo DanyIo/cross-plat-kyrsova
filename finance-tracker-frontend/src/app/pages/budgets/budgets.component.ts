@@ -1,42 +1,38 @@
 import { Component } from '@angular/core';
 import { BudgetService } from '../../services/budget.service';
-import { MatDialog } from '@angular/material/dialog';
-import { BudgetDialogComponent } from '../../components/budget-dialog/budget-dialog.component';
 import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
+import { MatCardModule } from '@angular/material/card';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button'
 @Component({
   selector: 'app-budgets',
-  imports: [CommonModule],
+  imports: [CommonModule, FormsModule, MatButtonModule, MatCardModule, MatFormFieldModule, MatInputModule],
   templateUrl: './budgets.component.html',
   styleUrl: './budgets.component.css',
 })
 export class BudgetComponent {
-  budgets: any[] = [];
+  budget: any = { categories: [] };
 
-  constructor(
-    private _budgetService: BudgetService,
-    public dialog: MatDialog
-  ) {}
+  constructor(private budgetService: BudgetService) { }
 
   ngOnInit(): void {
-    this.loadBudgets();
+    this.loadBudget();
   }
 
-  loadBudgets(): void {
-    this._budgetService.getBudgets().subscribe((data) => {
-      debugger;
-      this.budgets = data;
+  loadBudget() {
+    this.budgetService.getBudget().subscribe((data: any) => {
+      this.budget = data;
     });
   }
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(BudgetDialogComponent, {
-      width: '400px',
+  saveBudget() {
+    this.budgetService.updateBudget(this.budget).subscribe(() => {
     });
+  }
 
-    dialogRef.afterClosed().subscribe((result) => {
-      if (result) {
-        this.loadBudgets();
-      }
-    });
+  getTotalAmount(): number {
+    return this.budget.categories.reduce((sum: any, cat: any) => sum + Number(cat.amount), 0);
   }
 }

@@ -38,6 +38,7 @@ export class DashboardComponent {
   selectedMonth: string = ''; // Currently selected month
   showGeneralCategoryData: boolean = false; // Toggle for general category data
 
+  displayedColumns: string[] = ['category', 'amount', 'transaction_type', 'date'];
   colorScheme: Color = {
     name: 'custom',
     selectable: true,
@@ -51,7 +52,7 @@ export class DashboardComponent {
     domain: ['#ff9800', '#4caf50', '#03a9f4', '#e91e63', '#673ab7'],
   };
 
-  constructor(private _dashboardService: DashboardService) {}
+  constructor(private _dashboardService: DashboardService) { }
 
   ngOnInit(): void {
     this.loadDashboardData();

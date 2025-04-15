@@ -1,23 +1,17 @@
 from rest_framework import serializers
 from .models import Budget, BudgetCategory
+from apps.category.models import Category
 
 class BudgetCategorySerializer(serializers.ModelSerializer):
-    category_name = serializers.ReadOnlyField(source="category.name")
-    color = serializers.ReadOnlyField(source="category.color")
+    category_name = serializers.CharField(source='category.name', read_only=True)
 
     class Meta:
         model = BudgetCategory
-        fields = ["id", "category", "category_name", "color", "amount"]
+        fields = ['id', 'category', 'category_name', 'amount']
 
 class BudgetSerializer(serializers.ModelSerializer):
-    categories = BudgetCategorySerializer(many=True, read_only=True)
+    categories = BudgetCategorySerializer(many=True)
 
     class Meta:
         model = Budget
-        fields = ["id", "name", "categories", "created_at"]
-
-class BudgetCreateUpdateSerializer(serializers.Serializer):
-    name = serializers.CharField(max_length=100)
-    categories = serializers.ListField(
-        child=serializers.DictField(child=serializers.IntegerField())
-    )
+        fields = ['id', 'month', 'categories']

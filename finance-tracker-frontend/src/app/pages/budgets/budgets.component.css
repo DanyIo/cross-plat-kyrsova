@@ -1,0 +1,15 @@
+
+.flex-block{
+  display:flex;
+  flex-direction: row;
+  gap: 20px;
+  align-items: center;
+}
+
+
+
+.save-button-wrapper {
+  display: flex;
+  margin-left: 50px;
+}
+

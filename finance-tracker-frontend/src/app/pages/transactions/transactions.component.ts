@@ -37,7 +37,7 @@ export class TransactionsComponent implements OnInit {
   constructor(
     private transactionService: TransactionService,
     private dialog: MatDialog
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.loadTransactions();
@@ -45,7 +45,6 @@ export class TransactionsComponent implements OnInit {
 
   loadTransactions(): void {
     this.transactionService.getTransactions().subscribe((data) => {
-      debugger;
       this.transactions = data;
     });
   }
@@ -71,7 +70,6 @@ export class TransactionsComponent implements OnInit {
 
   addTransaction(transaction: Transaction): void {
     transaction.date = new Date(transaction.date).toISOString();
-    debugger;
 
     this.transactionService.addTransaction(transaction).subscribe(() => {
       this.loadTransactions();
