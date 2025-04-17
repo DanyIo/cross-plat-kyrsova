@@ -2,6 +2,7 @@ from .models import Transaction
 from .serializers import TransactionSerializer
 from django.http import HttpResponseForbidden
 
+
 class TransactionService:
     @staticmethod
     def get_user_transactions_data(user):
@@ -16,8 +17,8 @@ class TransactionService:
         """
         Creates a new transaction for the specific user.
         """
-        data['user'] = user
-    
+        data["user"] = user
+
         return Transaction.objects.create(**data)
 
     @staticmethod
@@ -27,13 +28,15 @@ class TransactionService:
         """
         # Ensure the transaction is owned by the user
         if transaction.user != user:
-                return HttpResponseForbidden("You do not have permission to view this resource.")
-        
+            return HttpResponseForbidden(
+                "You do not have permission to view this resource."
+            )
+
         # Update the transaction with the new data
         for attr, value in data.items():
             setattr(transaction, attr, value)
         transaction.save()
-        
+
     @staticmethod
     def destroy_transaction(user, transaction):
         """
@@ -41,8 +44,9 @@ class TransactionService:
         """
         # Ensure the transaction is owned by the user
         if transaction.user != user:
-            return HttpResponseForbidden("You do not have permission to delete this resource.")
-        
+            return HttpResponseForbidden(
+                "You do not have permission to delete this resource."
+            )
+
         transaction.delete()
         return None  # Return None to indicate successful deletion
-    

@@ -1,6 +1,6 @@
-
 from .models import Category
 from .serializers import CategorySerializer
+
 
 class CategoryService:
     @staticmethod

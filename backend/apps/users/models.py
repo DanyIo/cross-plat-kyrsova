@@ -11,7 +11,3 @@ class User(AbstractUser):
     user_permissions = models.ManyToManyField(
         "auth.Permission", related_name="custom_user_permissions", blank=True
     )
-
-    class Meta:
-        verbose_name = "User"
-        verbose_name_plural = "Users"

@@ -7,12 +7,14 @@ from apps.category.models import Category
 from .serializers import BudgetSerializer
 from django.utils import timezone
 
+
 class UserBudgetView(APIView):
     permission_classes = [IsAuthenticated]
 
     def get(self, request):
         # Get or create current month's budget
         from datetime import datetime
+
         today = datetime.today().replace(day=1)
         budget, created = Budget.objects.get_or_create(user=request.user, month=today)
 
@@ -26,14 +28,18 @@ class UserBudgetView(APIView):
 
     def put(self, request):
         """Update amounts for existing budget"""
-        budget = Budget.objects.filter(user=request.user, month__month=timezone.now().month).first()
+        budget = Budget.objects.filter(
+            user=request.user, month__month=timezone.now().month
+        ).first()
         if not budget:
-            return Response({"detail": "No budget found."}, status=status.HTTP_404_NOT_FOUND)
+            return Response(
+                {"detail": "No budget found."}, status=status.HTTP_404_NOT_FOUND
+            )
 
-        for cat_data in request.data.get('categories', []):
+        for cat_data in request.data.get("categories", []):
             try:
-                bc = BudgetCategory.objects.get(id=cat_data['id'], budget=budget)
-                bc.amount = cat_data['amount']
+                bc = BudgetCategory.objects.get(id=cat_data["id"], budget=budget)
+                bc.amount = cat_data["amount"]
                 bc.save()
             except BudgetCategory.DoesNotExist:
                 continue

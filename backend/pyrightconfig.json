@@ -1,6 +1,6 @@
 {
-    "exclude": ["venv"],
-    "venvPath": "./",
-    "reportUnknownMemberType": false,
-    "reportUnknownVariableType": false
+  "exclude": ["venv"],
+  "venvPath": "./",
+  "reportUnknownMemberType": false,
+  "reportUnknownVariableType": false
 }
