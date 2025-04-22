@@ -19,12 +19,11 @@
   <h3>Income vs. Expense</h3>
   <div class="chart-container" *ngIf="chartData.length != 0">
     <ngx-charts-line-chart [results]="chartData" [scheme]="colorScheme" [xAxis]="true" [yAxis]="true" [legend]="true"
-  [legendTitle]="legendTitle"
+      [legendTitle]="legendTitle"
       [showXAxisLabel]="true" [showYAxisLabel]="true" [xAxisLabel]="'Month'" [yAxisLabel]="'Amount'" [autoScale]="true"
       [tooltipDisabled]="false" [timeline]="true">
     </ngx-charts-line-chart>
   </div>
-
 
   <!-- Month Selector -->
   <div class="month-selector" *ngIf="months.length > 1">
@@ -45,7 +44,7 @@
   <!-- Category Breakdown Pie Chart -->
   <div class="chart-container" *ngIf="categoryData.length != 0">
     <ngx-charts-pie-chart [results]="categoryData" [scheme]="pieColorScheme" [legend]="true"
-  [legendTitle]="legendTitle"
+      [legendTitle]="legendTitle"
       [labels]="true">
     </ngx-charts-pie-chart>
   </div>
@@ -56,26 +55,26 @@
     <mat-progress-bar mode="determinate" [value]="budgetData.percent_spent"></mat-progress-bar>
     <p>{{ budgetData.actual_spent | currency }} spent out of {{ budgetData.budget | currency }}</p>
 
-<ngx-charts-bar-vertical-2d
-  [view]="view"
-  [scheme]="colorScheme"
-  [results]="multi"
-  [gradient]="false"
-  [xAxis]="showXAxis"
-  [yAxis]="showYAxis"
-  [legend]="showLegend"
-  [legendTitle]="legendTitle"
-  [xAxisLabel]="xAxisLabel"
-  [yAxisLabel]="yAxisLabel"
-  [showXAxisLabel]="showXAxisLabel"
-  [showYAxisLabel]="showYAxisLabel"
->
-</ngx-charts-bar-vertical-2d>
-</div>
- <!-- Recent Transactions -->
-  <div class="recent-transactions"style="margin-bottom: 2rem;">
+    <ngx-charts-bar-vertical-2d
+      [view]="view"
+      [scheme]="colorScheme"
+      [results]="multi"
+      [gradient]="false"
+      [xAxis]="showXAxis"
+      [yAxis]="showYAxis"
+      [legend]="showLegend"
+      [legendTitle]="legendTitle"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel">
+    </ngx-charts-bar-vertical-2d>
+  </div>
+
+  <!-- Recent Transactions -->
+  <div class="recent-transactions">
     <h3>Recent Transactions</h3>
-    <mat-table [dataSource]="recentTransactions" style="margin-bottom: 10px">
+    <mat-table [dataSource]="recentTransactions">
       <ng-container matColumnDef="category">
         <mat-header-cell *matHeaderCellDef> Category </mat-header-cell>
         <mat-cell *matCellDef="let transaction">{{ transaction.category }}</mat-cell>
@@ -99,4 +98,5 @@
       <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
       <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
     </mat-table>
-  </div></div>
+  </div>
+</div>

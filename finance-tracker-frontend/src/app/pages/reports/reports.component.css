@@ -1,0 +1,56 @@
+.reports-container {
+  display: flex;
+  gap: 40px;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+  max-width: 800px;
+  margin: auto;
+}
+
+.title {
+  font-size: 2rem;
+  margin-bottom: 20px;
+  font-family: "Arial", sans-serif;
+  color: #333;
+}
+
+.button-container {
+  margin-bottom: 20px;
+}
+
+button {
+  font-size: 1rem;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: black;
+  color: white;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: grey;
+}
+
+ngx-charts-line-chart {
+  border: 1px solid #ddd;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+@media (max-width: 768px) {
+  .reports-container {
+    max-width: 100%;
+    padding: 15px;
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  button {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+}

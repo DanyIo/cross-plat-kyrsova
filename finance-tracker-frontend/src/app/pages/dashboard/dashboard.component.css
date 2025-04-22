@@ -1,7 +1,135 @@
-.budget-progress{
-  display:flex;
-  justify-content:center;
-  flex-direction:column;
-  width:100%;
-  align-items:center;
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+h3 {
+  font-size: 1.6rem;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+.summary-cards {
+  display: flex;
+  justify-content: space-between;
+  gap: 20px;
+  width: 100%;
+  margin-bottom: 30px;
+}
+
+.card {
+  background-color: #ffffff;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: 30%;
+  text-align: center;
+}
+
+.card h3 {
+  font-size: 1.2rem;
+  color: #555;
+}
+
+.card p {
+  font-size: 1.4rem;
+  color: #3f51b5;
+  font-weight: bold;
+}
+
+.card.income {
+  background-color: #c8e6c9;
+}
+
+.card.expense {
+  background-color: #ffcdd2;
+}
+
+.card.balance {
+  background-color: #f0f4c3;
+}
+
+.chart-container {
+  width: 100%;
+  height: 400px;
+  margin-bottom: 20px;
+}
+
+.pie-chart-toggle {
+  margin-bottom: 20px;
+  font-size: 1rem;
+}
+
+.pie-chart-toggle label {
+  margin-right: 10px;
+}
+
+.month-selector {
+  margin-bottom: 20px;
+}
+
+.recent-transactions {
+  width: 100%;
+}
+
+.recent-transactions mat-table {
+  width: 100%;
+}
+
+.recent-transactions mat-header-row,
+.recent-transactions mat-row {
+  border-bottom: 1px solid #ddd;
+}
+
+.recent-transactions mat-header-cell,
+.recent-transactions mat-cell {
+  padding: 10px;
+  text-align: center;
+}
+
+.recent-transactions mat-header-cell {
+  background-color: #f4f4f4;
+}
+
+.recent-transactions mat-row:hover {
+  background-color: #f1f1f1;
+}
+
+.budget-progress {
+  width: 100%;
+  margin-bottom: 40px;
+}
+
+.budget-progress mat-progress-bar {
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 15px;
+  }
+
+  .summary-cards {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .card {
+    width: 100%;
+    margin-bottom: 20px;
+  }
+
+  h3 {
+    font-size: 1.4rem;
+  }
+
+  .recent-transactions mat-header-cell,
+  .recent-transactions mat-cell {
+    font-size: 0.9rem;
+  }
 }

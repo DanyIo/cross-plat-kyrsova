@@ -1,15 +1,74 @@
-
-.flex-block{
-  display:flex;
-  flex-direction: row;
-  gap: 20px;
+.budget-container {
+  display: flex;
+  flex-direction: column;
   align-items: center;
+  justify-content: center;
+  padding: 20px;
+  max-width: 600px;
+  margin: auto;
 }
 
+.budget-title {
+  font-size: 1.8rem;
+  margin-bottom: 20px;
+  font-family: "Arial", sans-serif;
+  color: #333;
+}
 
+.budget-amount {
+  font-size: 1.4rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: #3f51b5;
+}
+
+.budget-card-content {
+  width: 100%;
+}
+
+.budget-category {
+  margin-bottom: 15px;
+}
+
+.budget-field {
+  width: 100%;
+}
 
 .save-button-wrapper {
   display: flex;
-  margin-left: 50px;
+  justify-content: center;
+  margin-top: 20px;
 }
 
+button {
+  font-size: 1rem;
+  padding: 10px 20px;
+  border-radius: 5px;
+  background-color: black !important;
+  color: white !important;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: grey;
+}
+
+@media (max-width: 768px) {
+  .budget-container {
+    max-width: 100%;
+    padding: 15px;
+  }
+
+  .budget-title {
+    font-size: 1.5rem;
+  }
+
+  .budget-amount {
+    font-size: 1.2rem;
+  }
+
+  button {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+}

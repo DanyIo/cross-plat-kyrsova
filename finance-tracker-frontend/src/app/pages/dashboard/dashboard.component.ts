@@ -47,7 +47,12 @@ export class DashboardComponent {
   yAxisLabel = 'Amount ($)';
   xAxisLabel = 'Category';
   showYAxis = true;
-  displayedColumns: string[] = ['category', 'amount', 'transaction_type', 'date'];
+  displayedColumns: string[] = [
+    'category',
+    'amount',
+    'transaction_type',
+    'date',
+  ];
   colorScheme: Color = {
     name: 'custom',
     selectable: true,
@@ -61,7 +66,7 @@ export class DashboardComponent {
     domain: ['#ff9800', '#4caf50', '#03a9f4', '#e91e63', '#673ab7'],
   };
 
-  constructor(private _dashboardService: DashboardService) { }
+  constructor(private _dashboardService: DashboardService) {}
 
   ngOnInit(): void {
     this.loadDashboardData();
@@ -74,7 +79,7 @@ export class DashboardComponent {
       this.multi = this.transformToChartData(data.budget_vs_actual.categories);
       this.chartData = this.formatChartData(data.income_expense_chart);
       this.categoryDataByMonth = this.formatCategoryData(
-        data.category_breakdown
+        data.category_breakdown,
       );
       this.budgetData = data.budget_vs_actual;
       this.recentTransactions = data.recent_transactions;
@@ -89,8 +94,8 @@ export class DashboardComponent {
       name: cat.category_name,
       series: [
         { name: 'Planned', value: cat.planned },
-        { name: 'Actual', value: cat.actual }
-      ]
+        { name: 'Actual', value: cat.actual },
+      ],
     }));
   }
   formatChartData(data: any): any[] {

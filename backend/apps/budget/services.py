@@ -7,12 +7,10 @@ from rest_framework.exceptions import PermissionDenied
 class BudgetService:
     @staticmethod
     def get_user_budgets(user: User):
-        """Отримати всі бюджети поточного користувача"""
         return Budget.objects.filter(user=user)
 
     @staticmethod
     def create_budget(user: User, name: str, categories_data: list):
-        """Створити новий бюджет з категоріями"""
         budget = Budget.objects.create(user=user, name=name)
 
         # Додати категорії до бюджету
@@ -26,16 +24,13 @@ class BudgetService:
         return budget
 
     @staticmethod
-    def update_budget(user: User, budget_id: int, name: str, categories_data: list):
-        """Оновити бюджет користувача"""
+    def update_budget(user: User, budget_id: int, categories_data: list):
         budget = Budget.objects.filter(id=budget_id, user=user).first()
         if not budget:
             raise PermissionDenied("Budget not found or access denied.")
 
-        budget.name = name
         budget.save()
 
-        # Оновлення категорій
         BudgetCategory.objects.filter(budget=budget).delete()
         for category_data in categories_data:
             BudgetCategory.objects.create(
@@ -48,7 +43,6 @@ class BudgetService:
 
     @staticmethod
     def delete_budget(user: User, budget_id: int):
-        """Видалити бюджет"""
         budget = Budget.objects.filter(id=budget_id, user=user).first()
         if not budget:
             raise PermissionDenied("Budget not found or access denied.")
@@ -58,7 +52,6 @@ class BudgetService:
 
     @staticmethod
     def get_budget_summary(user: User):
-        """Отримати підсумкові витрати відносно бюджету"""
         budgets = Budget.objects.filter(user=user)
         summary = []
 
@@ -71,7 +64,6 @@ class BudgetService:
             )
             summary.append(
                 {
-                    "budget_name": budget.name,
                     "total_spent": total_spent,
                 }
             )

@@ -24,3 +24,7 @@ urlpatterns += [
 urlpatterns += [
     path("api/", include("apps.budget.urls")),
 ]
+
+urlpatterns += [
+    path("api/report/", include("apps.reports.urls")),
+]

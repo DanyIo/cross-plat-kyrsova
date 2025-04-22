@@ -1,12 +1,10 @@
 
+<div class="budget-container">
+  <h3 class="budget-title">📊 Monthly Budget</h3>
 
-<div class ="flex-block">  <h3>Monthly Budget</h3>
+  <p class="budget-amount">{{ getTotalAmount() | number: '1.2-2' }} €</p>
 
-<p>{{ getTotalAmount() | number: '1.2-2' }} €</p>
-
-  </div>
-  <mat-card-content>
-
+  <mat-card-content class="budget-card-content">
     <div *ngFor="let category of budget.categories" class="budget-category">
       <mat-form-field appearance="outline" class="budget-field">
         <mat-label>{{ category.category_name }}</mat-label>
@@ -18,12 +16,11 @@
         />
       </mat-form-field>
     </div>
-
   </mat-card-content>
 
-<mat-card-actions class="save-button-wrapper">
-  <button mat-raised-button color="primary" (click)="saveBudget()">Save</button>
-</mat-card-actions>
-
+  <mat-card-actions class="save-button-wrapper">
+    <button mat-raised-button (click)="saveBudget()">Save</button>
+  </mat-card-actions>
+</div>
 
 
