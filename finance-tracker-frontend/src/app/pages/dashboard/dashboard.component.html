@@ -49,7 +49,9 @@
     </ngx-charts-pie-chart>
   </div>
 
-  <!-- Budget vs Actual Progress Bar -->
+
+<!-- Budget vs Actual Progress Bar -->
+<div class="centered-budget-section">
   <div class="budget-progress">
     <h3>Budget vs Actual</h3>
     <mat-progress-bar mode="determinate" [value]="budgetData.percent_spent"></mat-progress-bar>
@@ -70,6 +72,8 @@
       [showYAxisLabel]="showYAxisLabel">
     </ngx-charts-bar-vertical-2d>
   </div>
+</div>
+
 
   <!-- Recent Transactions -->
   <div class="recent-transactions">

@@ -133,3 +133,15 @@ h3 {
     font-size: 0.9rem;
   }
 }
+
+.centered-budget-section {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.budget-progress {
+  max-width: 800px;
+  width: 100%;
+  text-align: center;
+}
