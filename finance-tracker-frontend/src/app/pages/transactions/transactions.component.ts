@@ -36,8 +36,8 @@ export class TransactionsComponent implements OnInit {
 
   constructor(
     private transactionService: TransactionService,
-    private dialog: MatDialog
-  ) { }
+    private dialog: MatDialog,
+  ) {}
 
   ngOnInit(): void {
     this.loadTransactions();

@@ -9,7 +9,7 @@ class TransactionService:
         """
         Returns a list of transaction data for the specific user (processed for the response).
         """
-        transactions = Transaction.objects.filter(user=user)
+        transactions = Transaction.objects.filter(user=user).order_by("-date")
         return TransactionSerializer(transactions, many=True).data  # Serialize the data
 
     @staticmethod
